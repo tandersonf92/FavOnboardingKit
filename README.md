@@ -113,3 +113,5 @@ class ViewController: UIViewController, FavOnboardingKitDelegate {
 ## Credits
 
 - Anderson Oliveira
+
+- Udemy course: https://www.udemy.com/course/ios-15-swift-5-build-a-library-with-swift-package-manager/
