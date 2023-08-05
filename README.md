@@ -47,8 +47,8 @@ If you prefer not to use Swift Package Manager, you can integrate FavOnboardingK
 import UIKit
 import FavOnboardingKit
 
-class ViewController: UIViewController, FavOnboardingKitDelegate {
-  
+class ViewController: UIViewController, FavOnboardingKitDelegateProtocol {
+
   private var onboardingKit: FavOnboardingKit?
 
   override func viewDidLoad() {
@@ -67,28 +67,27 @@ class ViewController: UIViewController, FavOnboardingKitDelegate {
           .init(image: UIImage(named: "imSlide5")!,
                 title: "Save and earn cashback with Deals or eCards")
         ],
-        tintColor: UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1.0))
-      self.onboardingKit?.delegate = self
+        tintColor: UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1.0), delegate: self)
       self.onboardingKit?.launchOnboarding(rootVC: self)
     }
   }
-  
+
   // MARK: - FavOnboardingKitDelegate {
   func nextButtonDidTap(atIndex index: Int) {
     print("next button is tapped at index: \(index)")
   }
-  
+
   func getStartedButtonDidTap() {
     onboardingKit?.dismissOnboarding()
     onboardingKit = nil
     transit(viewController: AnotherViewController())
   }
-  
+
   private func transit(viewController: UIViewController) {
     let foregroundScenes = UIApplication.shared.connectedScenes.filter({
       $0.activationState == .foregroundActive
     })
-    
+
     let window = foregroundScenes
       .map({ $0 as? UIWindowScene })
       .compactMap({ $0 })
@@ -96,10 +95,10 @@ class ViewController: UIViewController, FavOnboardingKitDelegate {
       .windows
       .filter({ $0.isKeyWindow })
       .first
-    
+
     guard let uWindow = window else { return }
     uWindow.rootViewController = viewController
-    
+
     UIView.transition(
       with: uWindow,
       duration: 0.3,
@@ -107,6 +106,13 @@ class ViewController: UIViewController, FavOnboardingKitDelegate {
       animations: nil,
       completion: nil)
   }
+}
+
+final class AnotherViewController: UIViewController {
+
+    override func viewDidLoad() {
+        view.backgroundColor = .green
+    }
 }
 ```
 
