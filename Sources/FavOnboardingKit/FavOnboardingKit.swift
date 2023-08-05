@@ -11,17 +11,17 @@ public class FavOnboardingKit {
 
     private let slides: [Slide]
     private let tintColor: UIColor
-    private let themeFont: UIFont
+    private let themeFont: UIFont?
     private var roorVC: UIViewController?
 
     private lazy var onboardingViewController: OnboardingViewController = {
-        let controller =  OnboardingViewController(slides: slides, tintColor: tintColor, themeFont: themeFont)
+        let controller =  OnboardingViewController(slides: slides, tintColor: tintColor, themeFont: themeFont ?? UIFont.systemFont(ofSize: 28, weight: .bold))
         controller.modalTransitionStyle = .crossDissolve
         controller.modalPresentationStyle = .fullScreen
         return controller
     }()
 
-    public init(slides: [Slide], tintColor: UIColor, delegate: FavOnboardingKitDelegateProtocol?, themeFont: UIFont = UIFont(name: "ArialRoundedMTBold", size: 28) ?? UIFont.systemFont(ofSize: 28, weight: .bold)) {
+    public init(slides: [Slide], tintColor: UIColor, delegate: FavOnboardingKitDelegateProtocol?, themeFont: UIFont? = UIFont(name: "ArialRoundedMTBold", size: 12)) {
         self.delegate = delegate
         self.slides = slides
         self.tintColor = tintColor
