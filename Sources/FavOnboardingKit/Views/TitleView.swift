@@ -2,10 +2,12 @@ import UIKit
 
 final class TitleView: UIView {
 
+    private let themeFont: UIFont
+
     // MARK: Properties
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont(name: "ArialRoundedMTBold", size: 28)
+        label.font = themeFont
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
         label.numberOfLines = 2
@@ -14,7 +16,8 @@ final class TitleView: UIView {
     }()
 
     // MARK: LifeCycle◊◊
-    init() {
+    init(themeFont: UIFont) {
+        self.themeFont = themeFont
         super.init(frame: .zero)
         setupViews()
     }
@@ -26,9 +29,6 @@ final class TitleView: UIView {
     func setTitle(text: String?) {
         titleLabel.text = text
     }
-
-
-    // MARK: Selectors
 }
 
 // MARK: View Configuration

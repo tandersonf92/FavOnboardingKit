@@ -6,6 +6,7 @@ final class TransitionView: UIView {
     private var slides: [Slide]
     private let barColor: UIColor
     private var timer: DispatchSourceTimer?
+    private let themeFont: UIFont
     private (set) var index: Int = -1
 
     private lazy var barStackView: UIStackView = {
@@ -33,10 +34,11 @@ final class TransitionView: UIView {
         return imageView
     }()
 
-    private lazy var titleView: TitleView = TitleView()
+    private lazy var titleView: TitleView = TitleView(themeFont: themeFont)
 
     // MARK: LifeCycle
-    init(slides: [Slide], barColor: UIColor) {
+    init(slides: [Slide], barColor: UIColor, themeFont: UIFont) {
+        self.themeFont = themeFont
         self.slides = slides
         self.barColor = barColor
         super.init(frame: .zero)

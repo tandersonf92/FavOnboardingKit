@@ -4,6 +4,7 @@ class OnboardingViewController: UIViewController {
 
     private let slides: [Slide]
     private let tintColor: UIColor
+    private let themeFont: UIFont
 
     var nextButtonDidTap: ((Int) -> Void)?
     var getStartedButtonDidTap: (() -> Void)?
@@ -15,7 +16,7 @@ class OnboardingViewController: UIViewController {
         return stackView
     }()
 
-    private lazy var transitionView: TransitionView = TransitionView(slides: slides, barColor: tintColor)
+    private lazy var transitionView: TransitionView = TransitionView(slides: slides, barColor: tintColor, themeFont: themeFont)
 
     private lazy var buttonContainerView: ButtonContainerView =  {
         let button = ButtonContainerView(tintColor: tintColor)
@@ -23,9 +24,10 @@ class OnboardingViewController: UIViewController {
         return button
     }()
 
-    init(slides: [Slide], tintColor: UIColor) {
+    init(slides: [Slide], tintColor: UIColor, themeFont: UIFont) {
         self.slides = slides
         self.tintColor = tintColor
+        self.themeFont = themeFont
         super.init(nibName: nil, bundle: nil)
         configureClosures()
         setupGesture()
@@ -40,6 +42,7 @@ class OnboardingViewController: UIViewController {
         transitionView.start()
     }
 
+    // MARK: Private Method
     private func configureClosures() {
         buttonContainerView.nextButtonDidTap = { [weak self] in
             guard let self = self else { return }
@@ -57,6 +60,7 @@ class OnboardingViewController: UIViewController {
         transitionView.addGestureRecognizer(tapGesture)
     }
 
+    // MARK: Selectors
     @objc private func viewDidTap(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: view)
         let midPoint = view.frame.size.width / 2
@@ -67,6 +71,7 @@ class OnboardingViewController: UIViewController {
         }
     }
 
+    // MARK: stopAnimation method
     func stopAnimation() {
         transitionView.stop()
     }

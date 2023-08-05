@@ -74,6 +74,10 @@ public extension UIView {
         self.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: multiplier).isActive = true
     }
 
+    func equalsWidthWithScreen() {
+        self.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width).isActive = true
+    }
+
     func equalsHeight(with view: UIView, multiplier: CGFloat = CGFloat(1.0)) {
         self.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: multiplier).isActive = true
     }
@@ -103,6 +107,10 @@ public extension UIView {
                     paddingBottom: padding.bottom,
                     paddingLeft: padding.left,
                     paddingRight: padding.right)
+    }
+    
+    func setHeightGreaterThanOrEqualTo(reference: UIView) {
+        self.heightAnchor.constraint(greaterThanOrEqualTo: reference.heightAnchor).isActive = true
     }
 }
 
