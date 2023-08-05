@@ -67,7 +67,8 @@ class ViewController: UIViewController, FavOnboardingKitDelegateProtocol {
           .init(image: UIImage(named: "imSlide5"),
                 title: "Save and earn cashback with Deals or eCards")
         ],
-        tintColor: UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1.0), delegate: self)
+        tintColor: UIColor(red: 220/255, green: 20/255, blue: 60/255, alpha: 1.0), delegate: self,
+                themeFont: UIFont(name: "Helvetica Bold", size: 28))
       self.onboardingKit?.launchOnboarding(rootVC: self)
     }
   }
